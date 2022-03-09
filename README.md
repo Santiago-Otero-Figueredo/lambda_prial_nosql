@@ -16,7 +16,9 @@ Este proyecto fue realizado utilizando como base lo descrito en el siguiente art
 
 ## Credenciales de AWS para uso de los servicios
 
-1. Crear usuario IAM con los permisos requeridos revisar el __`anexos 1`__ para obtener revisar la documentación oficial para creación de usuarios, y el __`anexo 2`__ para ver un video guía paso a paso del proceso.
+1.  Descomprimir el archivo __bin.zip__ y ubicar su contendio en la carpeta __bin__.
+
+2. Crear usuario IAM con los permisos requeridos revisar el __`anexos 1`__ para obtener revisar la documentación oficial para creación de usuarios, y el __`anexo 2`__ para ver un video guía paso a paso del proceso.
     - Revisar anexos para creación
     - Permisos:
         -   AdministratorAccess
@@ -26,10 +28,10 @@ Este proyecto fue realizado utilizando como base lo descrito en el siguiente art
         -   AWSLambdaBasicExecutionRole-30555cd8-4deb-4ebb-ba8a-5277e775c785
     - Guardar ID_ACCESS_KEY y SECRECT_ACCESS_KEY, se necesitaran mas adelante
 
-2. Instalar la consola de AWS:
+3. Instalar la consola de AWS:
     - https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-install.html
 
-3. Configurar consola de AWS anteriormente instalada:
+4. Configurar consola de AWS anteriormente instalada:
     - Ejecutar comando:
         -   asw configure
     - En __`AWS access key ID`__ pegar el valor de ID_ACCESS_KEY que se genero en el punto __1__
@@ -42,7 +44,7 @@ Este proyecto fue realizado utilizando como base lo descrito en el siguiente art
     - Para mas información sobre las configuraciones revisar la pagina oficial:
         - https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-format
 
-4. Crear un bucket S3
+5. Crear un bucket S3
     - https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html.
     - Asignarle el nombre __scrapping-lambda__. Este es el nombre que esta configurado en los .yaml.
     - Añadir dentro del S3 una carpeta con el nombre __src__.
