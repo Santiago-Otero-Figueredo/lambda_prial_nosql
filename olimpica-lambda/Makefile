@@ -1,4 +1,5 @@
-limpiar:		## elimina las carpetas pycache y deploy
+## elimina las carpetas pycache y deploy
+limpiar:
 	@rm -rf deploy  
 	@rm -rf __pycache__
 
@@ -12,6 +13,7 @@ construir-funcion-lambda: limpiar
 	rm -rf deploy
 
 ## Crea una pila en CloudFormation en AWS con función lambda y rol.
+## Crear una carpeta en el S3 dentro del src con el nombre que tendra la funcion lambda(aqui se guardaran los archviosd e librerias necesarios para que funcione el lambda)
 ## como usar: make BUCKET=nombre_bucket_s3 crear-pila
 ## s3_actual = scrapping-lambda
 crear-pila:

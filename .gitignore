@@ -2,5 +2,7 @@
 tmp/*
 __pycache__
 .DS_Store
+.env
+*/bin/chromedriver
 */bin/chromium
-claves_acceso_aws.csv
+!archivos_base/bin.zip

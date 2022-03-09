@@ -102,10 +102,10 @@ def es_palabra_similar(nombre_analisis:str, nombre_en_listado:str) -> bool:
     if nombre_analisis != '' and nombre_en_listado != '':
         palabras_lcs = (lcs(nombre_analisis,nombre_en_listado)/len(nombre_analisis))*100
         palabras_lcs = palabras_lcs >= 90
-        levenshtein = es_similar_distancia_edicion(nombre_analisis,nombre_en_listado)
+        #levenshtein = es_similar_distancia_edicion(nombre_analisis,nombre_en_listado)
         palabras_comunes = contiene_elementos(nombre_analisis,nombre_en_listado) 
         
-        if palabras_lcs or levenshtein or palabras_comunes:        
+        if palabras_lcs or palabras_comunes:        
             return True
         return False
     return False

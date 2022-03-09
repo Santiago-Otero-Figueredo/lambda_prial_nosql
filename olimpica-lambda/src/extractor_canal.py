@@ -10,7 +10,8 @@ from selenium.common.exceptions import NoSuchElementException
 
 from extracciones.extractores.utils import (quitar_acentos, 
                     limpiar_precio, 
-                    obtener_cantidad_medida_regex)
+                    )
+
 
 
 class Olimpica(ExtraccionGraphQl):
@@ -23,28 +24,28 @@ class Olimpica(ExtraccionGraphQl):
             nombre (string): Nombre del producto a buscar.
     """
     _IDENTIFICADOR = 18
-    
+
     _TIPOS_MEDIDAS = {
         'pesos': ['gramos', 'gramo', 'grs', 'gr', 'g', 'kilogramos', 'kilogramo', 'kilos', 'kilo', 'kgs', 'kg' , 'onzas', 'onza', 'onz'],
-        'volumenes':['mililitro', 'mls', 'ml', 'litros', 'litro', 'lts', 'lt', 'l'],        
+        'volumenes':['mililitro', 'mls', 'ml', 'litros', 'litro', 'lts', 'lt', 'l'],
         'cantidades':['barra', 'unidades', 'unidad', 'und', 'paquetes', 'paquete', 'pack' ],
     }
     _LISTA_EXPRESIONES_REGULARES = ['([0-9]*["."]*[0-9]+)[" "]*{}', # <cantidad> <unidad_medida> --> 1.5 litros
                     '{}[" "]*([0-9]*["."]*[0-9]+)'] # <unidad_medida> <cantidad> --> Unidades 6
 
-    
+
     def __init__(self, **kwargs):
         super(Olimpica, self).__init__(**kwargs)
         self._URL = "{}{}".format(self._DOMINIO, "{}?_q={}&map=ft")
-        self._url_scrap = self._URL.format(self._nombre_producto_buscado, self._nombre_producto_buscado)   
+        self._url_scrap = self._URL.format(self._nombre_producto_buscado, self._nombre_producto_buscado)
      
         self._extraer_contenido_html()
         self._scrap()
 
 
-    def seleccionar_region(self) -> list:
-        """No hay region"""
-        raise NotImplementedError
+    def inicializar_dominio_url(self):
+        self._NOMBRE = 'Supertiendas y Droguerías Olimpica S.A.'
+        self._DOMINIO = 'https://www.olimpica.com/'
 
 
     def obtener_productos_html(self, elemento_producto) -> list:
@@ -54,17 +55,10 @@ class Olimpica(ExtraccionGraphQl):
             return []
 
 
-    def obtener_marca(self, elemento_producto) -> list:
-        marca = ""
-        return marca.capitalize()    
-    
-
     def obtener_nombre(self, elemento_producto) -> list:
-
         nombre_producto = elemento_producto.find_element_by_class_name("vtex-product-summary-2-x-productNameContainer").text.strip()
-
         return quitar_acentos(nombre_producto)
-   
+
 
     def obtener_precios(self, elemento_producto) -> list:
 
@@ -79,35 +73,16 @@ class Olimpica(ExtraccionGraphQl):
             'precio_original':precio_original,
             'precio_oferta':precio_oferta
         }
-        print(precios)
         return precios
 
-      
-    def obtener_url_imagen(self, elemento_producto) -> list:
-        url_imagen = ""
-        return url_imagen
-    
-
-    def obtener_unidades(self, elemento_producto) -> list:
-        
-        unidades = obtener_cantidad_medida_regex(elemento_producto, self._LISTA_EXPRESIONES_REGULARES, self._TIPOS_MEDIDAS)
-        return unidades    
-   
-
-    def obtener_espeficicaciones(self, elemento_producto) -> list:
-        especificaciones = []  
-        return especificaciones
 
 
 """
 from apps.extracciones.extractores.exito import Exito
 kwargs = {
-    "nombre":"Freidora Imusa Quick Fry 3.5 Lt 1070 W Negro",
-    "marca":"",
-    "pais":"",
-    "departamento":"valle",
-    "ciudad":"cali",
-    "temporal":false
+    "nombre":"Crema Dental Colgate Triple Acción 125 Ml X3 Unds",
+    "temporal":false,
+    "extraer_regiones":false
 }
 e = Exito(**kwargs)
 print(e.obtener_productos())

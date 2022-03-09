@@ -8,8 +8,7 @@ from selenium import webdriver
 logger = logging.getLogger()
 
 class NavegadorPersonalizado:
-
-    
+  
 
     def __init__(self):
         self._tmp_folder = '/tmp/{}'.format(uuid.uuid4())
@@ -73,7 +72,7 @@ class NavegadorPersonalizado:
             '--single-process',
             '--headless']
 
-        #chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--disable-gpu')
         for argument in lambda_options:
             chrome_options.add_argument(argument)          
         chrome_options.add_argument('--user-data-dir={}'.format(self._tmp_folder + '/user-data'))
@@ -101,6 +100,3 @@ class NavegadorPersonalizado:
     def close(self):
         # Remove specific tmp dir of this "run"
         shutil.rmtree(self._tmp_folder)
-
-
- 
